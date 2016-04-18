@@ -3,14 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   </head>
   <body>
     <div ng-app="todo">
       <div ng-controller="homeController as home">
-        {{home.message}}
+        <greeting></greeting>
       </div>
       <div ng-controller="todoController as todo">
-        {{todo.todo}}
+        <div class="row">
+          <ul class="checkbox" ng-repeat="x in list">
+            <li><input type="checkbox">{{x.item}}</input></li>
+          </ul>
+        </div>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
