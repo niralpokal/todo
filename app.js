@@ -41,9 +41,20 @@ app.get('/list/:users', function(req, res) {
   })
 });
 
-/*app.put('/list',jsonParser, function(req, res){
-
-})*/
+app.put('/list/:users',jsonParser, function(req, res){
+  var item = req.body
+  var user = req.params.users
+  MongoClient.connect(url, function(err,db){
+    if(err){
+      throw(err);
+    }else{
+      db.collection('lists').update({'user':user}, {$set:{'list':item}}, function(err, results){
+        db.close();
+        res.sendStatus(200);
+      })
+    }
+  })
+})
 
 app.delete('/list/:users', function(req,res){
   var user = req.params.users;
