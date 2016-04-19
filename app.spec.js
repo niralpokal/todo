@@ -25,10 +25,12 @@ describe('Check List', function(){
       if (!err && response.statusCode ==200) {
       assert.isAtLeast(body.length, 1, 'we found something');
         done();
+      }else if(err){
+        throw(err);
       }
     })
   })
-  it('updating a list', function(done){
+  it('updating the list', function(done){
     request({
       method: 'PUT',
       url: 'http://localhost:'+ port+ '/list/Tom',
@@ -36,6 +38,8 @@ describe('Check List', function(){
     }, function(err,response,body){
       if(!err && response.statusCode ==200){
         done();
+      }else if(err){
+        throw(err);
       }
     })
   })
