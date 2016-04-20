@@ -3,17 +3,30 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   </head>
   <body>
     <div ng-app="todo">
-      <div ng-controller="homeController as home">
-        {{home.message}}
+      <div ng-show="!start" class="jumbotron">
+        <div class="container">
+          <h1>Hello</h1>
+          <p>View a todo list<p>
+            <p><a ng-click="start=!start"class="btn btn-primary btn-lg" href="#/todo" role="button">Let's Go</a></p>
+        </div>
       </div>
-      <div ng-controller="todoController as todo">
-        {{todo.todo}}
+      <div class="row-fluid panel panel-default well">
+        <div ng-view></div>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
-    <script src="app.js"></script>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-route.js"></script>
+  <script src="app.js"></script>
+  <script src=home/home.controller.js></script>
+  <script src="todo/todo.controller.js"></script>
+  <script src="home/greeting.directive.js"></script>
+  <script src="todo/number.directive.js"></script>
+  <script src="todo/list.directive.js"></script>
+  <script src="todo/add.directive.js"></script>
   </body>
 </html>

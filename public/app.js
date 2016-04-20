@@ -1,26 +1,15 @@
-var app = angular.module('todo', []);
+var app = angular.module('todo', ['ngRoute']);
 
-app.controller('homeController', home);
-
-app.$inject = ['$http'];
-
-function home($http){
-  var vm = this
-  var user = $http.get('http://localhost:8080/user');
-  user.then(function(info){
-    vm.message = info.data.name
+app.config(['$routeProvider', function($routeProvider){
+  $routeProvider
+  .when("/todo/", {
+    templateUrl: "todo/todo.view.html",
+    controller: "todoController",
+    controllerAs: "todo"
   })
-}
-
-
-app.controller('todoController', todo);
-
-app.$inject = ['$http'];
-
-function todo($http){
-  var vm = this;
-  var todos = $http.get('http://localhost:8080/todos/Niral')
-  todos.then(function(info){
-    vm.todo = info.data
+  .when("/profile", {
+    templateUrl: "profile.html",
+    controller: "profileController",
+    controllerAs: "profile"
   })
-}
+}]);
