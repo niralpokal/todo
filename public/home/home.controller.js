@@ -1,10 +1,10 @@
 app.controller('homeController', home);
 
-app.$inject = ['$http'];
+app.$inject = ['$http', 'userService'];
 
-function home($http){
+function home($http, userService){
   var vm = this
-  var user = $http.get('http://localhost:8080/user');
+  var user = userService.getUser()
   user.then(function(info){
     vm.message = "Welcome Home, "
     vm.user = info.data
