@@ -7,9 +7,4 @@ app.config(['$routeProvider', function($routeProvider){
     controller: "todoController",
     controllerAs: "todo"
   })
-  .when("/profile", {
-    templateUrl: "profile.html",
-    controller: "profileController",
-    controllerAs: "profile"
-  })
 }]);
