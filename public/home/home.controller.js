@@ -1,12 +1,12 @@
 app.controller('homeController', home);
 
-app.$inject = ['$http', 'userService'];
+app.$inject = ['userService', '$filter'];
 
-function home($http, userService){
+function home(userService, $filter){
   var vm = this
   var user = userService.getUser()
   user.then(function(info){
     vm.message = "Welcome Home, "
-    vm.user = info.data
+    vm.user = info.data.user
   })
 }
