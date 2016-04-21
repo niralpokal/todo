@@ -5,5 +5,6 @@ install:
 before_script:
   - npm install -g gulp
   - npm install -g mocha
-  
+  - nom install -g casperjs
+
 script: gulp test
