@@ -9,7 +9,7 @@ app.use(express.static('./public/'))
 
 app.get('/user', function(req, res) {
   var myData ={
-    name: 'Niral',
+    name: 'niral',
     location: 'Newport Beach, Ca'
   }
   res.json(myData);
