@@ -5,7 +5,7 @@ app.$inject = ['$http',  'userService'];
 
 function todo($http){
   var vm = this;
-  var todos = $http.get('http://localhost:8080/list/Niral')
+  var todos = $http.get('http://localhost:8080/list/niral')
   todos.then(function(info){
     vm.list = info.data
     vm.message = ' tasks left'
@@ -14,7 +14,7 @@ function todo($http){
     var location = vm.list.indexOf(item);
     vm.list.splice(location, 1);
     console.log(vm.list);
-    var update = $http.put('http://localhost:8080/list/Niral', vm.list)
+    var update = $http.put('http://localhost:8080/list/niral', vm.list)
   }
   vm.add = function(item){
     var date1 = new Date();
@@ -25,6 +25,6 @@ function todo($http){
     }
     vm.list.push(task);
     console.log(vm.list);
-    var update = $http.put('http://localhost:8080/list/Niral', vm.list)
+    var update = $http.put('http://localhost:8080/list/niral', vm.list)
   }
 }
