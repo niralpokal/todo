@@ -6,6 +6,8 @@ before_script:
   - npm install -g gulp
   - npm install -g mocha
   - npm install -g casperjs
+  - npm unistall -g casperjs
+  - npm install -g casperjs
   - casperjs --version
   - npm install -g bower
   - bower install
