@@ -2,7 +2,7 @@ var app = require('express')();
 var express = require('express')
 var MongoClient = require('mongodb').MongoClient;
 var jsonParser = require('body-parser').json();
-var url = "mongodb://localhost:27017/test"
+var url = "mongodb://test:test@ds013881.mlab.com:13881/todotest"
 
 app.use(express.static('./public/'))
 
@@ -58,8 +58,8 @@ app.put('/list/:users',jsonParser, function(req, res){
         if(err){
           throw err;
         }else{
-          db.close();
           res.sendStatus(200);
+          db.close();
         }
       })
     }
