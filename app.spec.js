@@ -7,11 +7,24 @@ var server = app.listen(RANDOMIZE);
 var port = server.address().port;
 
 describe('Check List', function(){
-  it('create a new list', function(done){
+  it('create a new user', function(done){
     request({
       method: 'POST',
       url: 'http://localhost:' + port+ '/list',
-      json:{user:'Tom',list:[{item:"Code"},{item:"Work out"},{item:'Sleep'}]}
+      json:{user:'Tom', pass:'tom', list:[{item:"Code"},{item:"Work out"},{item:'Sleep'}]}
+    }, function(err, response, body){
+      if(!err && response.statusCode==200){
+        done();
+      }else if(err){
+        throw(err);
+      }
+    })
+  })
+  it('check if you can login', function(done){
+    request({
+      method: 'POST',
+      url: 'http://localhost:' + port+ '/login',
+      json:{user:'Tom',pass:'tom'}
     }, function(err, response, body){
       if(!err && response.statusCode==200){
         done();

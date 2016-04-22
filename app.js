@@ -6,14 +6,23 @@ var url = "mongodb://localhost:27017/test"
 
 app.use(express.static('./public/'))
 
-
-app.get('/user', function(req, res) {
-  var myData ={
-    name: 'Niral',
-    location: 'Newport Beach, Ca'
-  }
-  res.json(myData);
-});
+app.post('/login', jsonParser, function(req, res){
+  var list = req.body
+  MongoClient.connect(url, function(err,db){
+    if(err){
+      throw err;
+    }else{
+      db.collection('lists').find(list).toArray(function(err, docs){
+        if(err){
+          throw err;
+        }else{
+          db.close();
+          res.send(docs[0].list);
+        }
+      })
+    }
+  })
+})
 
 app.post('/list', jsonParser,  function(req, res) {
   var list = req.body
