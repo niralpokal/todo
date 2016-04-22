@@ -7,6 +7,4 @@ before_script:
   - npm install -g mocha
   - npm install -g phantomjs -prebuilt
   - npm install -g git+https://github.com/n1k0/casperjs.git
-  - npm install -g bower
-  - bower install
 script: gulp test
