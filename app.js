@@ -19,7 +19,6 @@ app.post('/user', jsonParser, function(req, res){
         if(err){
           throw err;
         }else{
-          db.close();
           console.log(docs[0]);
           res.cookie('id', docs[0]._id);
           res.sendStatus(200);
@@ -55,10 +54,10 @@ app.post('/list', jsonParser,  function(req, res) {
       throw err;
     }else{
       db.collection('lists').insert([list], function(err, results){
-        db.close();
         var x = results.ops[0]._id
         res.cookie('id', x);
         res.sendStatus(200);
+        db.close();
       });
     }
   })

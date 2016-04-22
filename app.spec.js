@@ -6,6 +6,7 @@ var RANDOMIZE = 0;
 var server = app.listen(RANDOMIZE);
 var port = server.address().port;
 var request = request.defaults({jar:true});
+
 describe('Check List', function(){
   it('create a new user', function(done){
     request({
