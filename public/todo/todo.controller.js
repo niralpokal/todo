@@ -1,13 +1,14 @@
 var app = angular.module('todo')
 app.controller('todoController', todo);
 
-app.$inject = ['$http',  'userService'];
+app.$inject = ['$http',  'userService', '$filter'];
 
-function todo($http, userService){
+function todo($http, userService, $filter){
   var vm = this;
   var currentUser = userService.getUser();
   currentUser.then(function(info){
-    var a = info.data
+    vm.welcomemessage = "Welcome Home, "
+    vm.user = info.data.user
   })
   var todos = $http.get('http://localhost:8080/list/')
   todos.then(function(info){

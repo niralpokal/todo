@@ -5,7 +5,7 @@ var app = require('./app.js')
 var RANDOMIZE = 0;
 var server = app.listen(RANDOMIZE);
 var port = server.address().port;
-
+var request = request.defaults({jar:true});
 describe('Check List', function(){
   it('create a new user', function(done){
     request({
@@ -23,7 +23,7 @@ describe('Check List', function(){
   it('check if you can login', function(done){
     request({
       method: 'POST',
-      url: 'http://localhost:' + port+ '/login',
+      url: 'http://localhost:' + port+ '/user',
       json:{user:'Tom',pass:'tom'}
     }, function(err, response, body){
       if(!err && response.statusCode==200){
@@ -34,7 +34,7 @@ describe('Check List', function(){
     })
   })
   it('checking the list', function(done){
-    request.get('http://localhost:' + port+ '/list/Tom', function(err, response, body){
+    request.get('http://localhost:' + port+ '/list/', function(err, response, body){
       if (!err && response.statusCode ==200) {
       assert.isAtLeast(body.length, 1, 'we found something');
         done();
@@ -46,7 +46,7 @@ describe('Check List', function(){
   it('updating the list', function(done){
     request({
       method: 'PUT',
-      url: 'http://localhost:'+ port+ '/list/Tom',
+      url: 'http://localhost:'+ port+ '/list/',
       json:[{item:"Code"},{item:"Work out"}]
     }, function(err,response,body){
       if(!err && response.statusCode ==200){
@@ -57,7 +57,7 @@ describe('Check List', function(){
     })
   })
   it('delete the list', function(done){
-    request.del('http://localhost:' + port+ '/list/Tom', function(err,response,body){
+    request.del('http://localhost:' + port+ '/list/', function(err,response,body){
       if(err){
         throw err;
       }else if(!err && response.statusCode ==200){

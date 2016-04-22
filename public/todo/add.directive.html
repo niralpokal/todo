@@ -1,4 +1,4 @@
-<form class="form-inline">
-  <input ng-model="newTask" type="text" value=""></input>
-  <button type="submit" class=" btn btn-primary" ng-click="todo.add(newTask); newTask=null;">Add Task</button>
+<form name="new-task"class="form-inline">
+  <input ng-model="newTask" name="newtask" type="text" value=""></input>
+  <button id="addBtn"type="submit" class=" btn btn-primary" ng-click="todo.add(newTask); newTask=null;">Add Task</button>
 </form>

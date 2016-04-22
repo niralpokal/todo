@@ -4,7 +4,7 @@ var cookieParser = require('cookie-parser');
 var MongoClient = require('mongodb').MongoClient;
 var jsonParser = require('body-parser').json();
 var ObjectID = require('mongodb').ObjectID
-var url = "mongodb://localhost:27017/test"
+var url = "mongodb://test:test@ds013881.mlab.com:13881/todotest"
 
 app.use(express.static('./public/'))
 app.use(cookieParser());
@@ -20,6 +20,7 @@ app.post('/user', jsonParser, function(req, res){
           throw err;
         }else{
           db.close();
+          console.log(docs[0]);
           res.cookie('id', docs[0]._id);
           res.sendStatus(200);
         }
