@@ -10,7 +10,7 @@ casper.test.begin('Lets test our Todo App', function(test){
     test.assertUrlMatch(/#\/todo/, 'we are at the todo screen')
     this.wait(7000, function(){
       this.capture('test2.png')
-      //test.assertTextExists('Welcome Home, ', 'we got a welcome message')
+      test.assertTextExists('Welcome Home, ', 'we got a welcome message')
     })
   }).then(function(){
     this.wait(3000, function(){
