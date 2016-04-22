@@ -5,10 +5,7 @@ install:
 before_script:
   - npm install -g gulp
   - npm install -g mocha
-  - npm install -g casperjs
-  - npm uninstall -g casperjs
-  - npm install -g casperjs
-  - casperjs --version
+  - npm install -g git+https://github.com/n1k0/casperjs.git
   - npm install -g bower
   - bower install
 script: gulp test
