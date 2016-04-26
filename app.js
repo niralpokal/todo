@@ -19,9 +19,9 @@ app.post('/user', jsonParser, function(req, res){
         if(err){
           throw err;
         }else{
-          console.log(docs[0]);
           res.cookie('id', docs[0]._id);
           res.sendStatus(200);
+          db.close();
         }
       })
     }
@@ -39,13 +39,17 @@ app.get('/user', function(req, res) {
         if(err){
           throw err;
         }else{
-          db.close();
           res.send(docs[0]);
+          db.close();
         }
       })
     }
   })
 });
+app.delete('/user', function(req, res){
+  res.clearCookie('id')
+  res.sendStatus(200)
+})
 
 app.post('/list', jsonParser,  function(req, res) {
   var list = req.body
@@ -75,8 +79,8 @@ app.get('/list', function(req, res) {
         if(err){
           throw err;
         }else{
-          db.close();
           res.send(docs[0].list);
+          db.close();
         }
       })
     }
@@ -96,8 +100,8 @@ app.put('/list',jsonParser, function(req, res){
         if(err){
           throw err;
         }else{
-          db.close();
           res.sendStatus(200);
+          db.close();
         }
       })
     }
@@ -116,8 +120,8 @@ app.delete('/list', function(req,res){
         if (err){
           throw err;
         }else{
-          db.close();
           res.sendStatus(200);
+          db.close();
         }
       })
     }

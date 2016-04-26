@@ -1,9 +1,9 @@
 var app = angular.module('todo')
 app.controller('todoController', todo);
 
-app.$inject = ['$http',  'userService', '$filter'];
+app.$inject = ['$http', 'userService', '$filter', '$location', '$route'];
 
-function todo($http, userService, $filter){
+function todo($http, userService, $filter, $location, $route){
   var vm = this;
   var currentUser = userService.getUser();
   currentUser.then(function(info){
@@ -29,5 +29,12 @@ function todo($http, userService, $filter){
     }
     vm.list.push(task);
     var update = $http.put('http://localhost:8080/list/', vm.list)
+  }
+  vm.logout = function(){
+    var update = $http.delete('http://localhost:8080/user')
+    update.then(function(){
+      $location.path('/login')
+      $route.reload();
+    })
   }
 }
