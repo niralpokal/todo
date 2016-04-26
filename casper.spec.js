@@ -36,7 +36,12 @@ casper.test.begin('Lets test our Todo App', function(test){
     test.assertTextDoesntExist('Casper', 'we removed the task called casper')
     this.capture('test4.png')
   })
-  }).run(function(){
+}).then(function(){
+  this.click('#logout');
+  this.wait(1000, function(){
+    test.assertUrlMatch(/#\/login/, 'we logged out')
+  })
+}).run(function(){
     test.done();
   })
 })

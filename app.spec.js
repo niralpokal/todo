@@ -35,6 +35,7 @@ describe('Check List', function(){
     })
   })
   it('checking the list', function(done){
+    this.timeout(3000)
     request.get('http://localhost:' + port+ '/list/', function(err, response, body){
       if (!err && response.statusCode ==200) {
       assert.isAtLeast(body.length, 1, 'we found something');
