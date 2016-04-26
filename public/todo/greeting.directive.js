@@ -4,6 +4,6 @@ app.directive('greeting', greeting);
 
 function greeting(){
   return{
-    templateUrl:'home/greeting.directive.html'
+    templateUrl:'todo/greeting.directive.html'
   }
 }

@@ -1,12 +1,15 @@
 var app = require('express')();
-var express = require('express')
+var express = require('express');
+var cookieParser = require('cookie-parser');
 var MongoClient = require('mongodb').MongoClient;
 var jsonParser = require('body-parser').json();
-var url = "mongodb://localhost:27017/test"
+var ObjectID = require('mongodb').ObjectID
+var url = "mongodb://test:test@ds013881.mlab.com:13881/todotest"
 
 app.use(express.static('./public/'))
+app.use(cookieParser());
 
-app.post('/login', jsonParser, function(req, res){
+app.post('/user', jsonParser, function(req, res){
   var list = req.body
   MongoClient.connect(url, function(err,db){
     if(err){
@@ -16,13 +19,33 @@ app.post('/login', jsonParser, function(req, res){
         if(err){
           throw err;
         }else{
-          db.close();
-          res.send(docs[0].list);
+          console.log(docs[0]);
+          res.cookie('id', docs[0]._id);
+          res.sendStatus(200);
         }
       })
     }
   })
 })
+app.get('/user', function(req, res) {
+  var user = {
+    _id:ObjectID(req.cookies.id)
+  }
+  MongoClient.connect(url, function(err,db){
+    if(err){
+      throw err;
+    }else{
+      db.collection('lists').find(user).toArray(function(err, docs){
+        if(err){
+          throw err;
+        }else{
+          db.close();
+          res.send(docs[0]);
+        }
+      })
+    }
+  })
+});
 
 app.post('/list', jsonParser,  function(req, res) {
   var list = req.body
@@ -31,20 +54,24 @@ app.post('/list', jsonParser,  function(req, res) {
       throw err;
     }else{
       db.collection('lists').insert([list], function(err, results){
-        db.close();
+        var x = results.ops[0]._id
+        res.cookie('id', x);
         res.sendStatus(200);
+        db.close();
       });
     }
   })
 });
 
-app.get('/list/:users', function(req, res) {
-  var user = req.params.users
+app.get('/list', function(req, res) {
+  var user = {
+    _id:ObjectID(req.cookies.id)
+  }
   MongoClient.connect(url, function(err, db){
     if(err){
       throw err;
     }else{
-      db.collection('lists').find({'user':user}).toArray(function(err, docs){
+      db.collection('lists').find(user).toArray(function(err, docs){
         if(err){
           throw err;
         }else{
@@ -56,14 +83,16 @@ app.get('/list/:users', function(req, res) {
   })
 });
 
-app.put('/list/:users',jsonParser, function(req, res){
+app.put('/list',jsonParser, function(req, res){
   var item = req.body
-  var user = req.params.users
+  var user = {
+    _id:ObjectID(req.cookies.id)
+  }
   MongoClient.connect(url, function(err,db){
     if(err){
       throw err;
     }else{
-      db.collection('lists').update({'user':user}, {$set:{'list':item}}, function(err, results){
+      db.collection('lists').update(user, {$set:{'list':item}}, function(err, results){
         if(err){
           throw err;
         }else{
@@ -75,13 +104,15 @@ app.put('/list/:users',jsonParser, function(req, res){
   })
 })
 
-app.delete('/list/:users', function(req,res){
-  var user = req.params.users;
+app.delete('/list', function(req,res){
+  var user = {
+    _id:ObjectID(req.cookies.id)
+  }
   MongoClient.connect(url, function(err, db){
     if(err){
       throw err
     }else{
-      db.collection('lists').remove({'user':user}, function(err, results){
+      db.collection('lists').remove(user, function(err, results){
         if (err){
           throw err;
         }else{

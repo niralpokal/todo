@@ -1,0 +1,12 @@
+
+<form name="loginForm" ng-show="start">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" ng-model="user.user"name="name" placeholder="Name">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" ng-model="user.pass"name="password" placeholder="Password">
+  </div>
+  <button id="loginBtn" type="button" ng-click="start=!start; login.login(user, '/todo'); user=null" class="btn btn-primary">Login</button>
+</form>

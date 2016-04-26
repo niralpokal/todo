@@ -1,11 +1,16 @@
 var app = angular.module('todo')
 app.controller('todoController', todo);
 
-app.$inject = ['$http',  'userService'];
+app.$inject = ['$http',  'userService', '$filter'];
 
-function todo($http){
+function todo($http, userService, $filter){
   var vm = this;
-  var todos = $http.get('http://localhost:8080/list/Niral')
+  var currentUser = userService.getUser();
+  currentUser.then(function(info){
+    vm.welcomemessage = "Welcome Home, "
+    vm.user = info.data.user
+  })
+  var todos = $http.get('http://localhost:8080/list/')
   todos.then(function(info){
     vm.list = info.data
     vm.message = ' tasks left'
@@ -13,8 +18,7 @@ function todo($http){
   vm.complete = function(item){
     var location = vm.list.indexOf(item);
     vm.list.splice(location, 1);
-    console.log(vm.list);
-    var update = $http.put('http://localhost:8080/list/Niral', vm.list)
+    var update = $http.put('http://localhost:8080/list/', vm.list)
   }
   vm.add = function(item){
     var date1 = new Date();
@@ -24,7 +28,6 @@ function todo($http){
       date:date1
     }
     vm.list.push(task);
-    console.log(vm.list);
-    var update = $http.put('http://localhost:8080/list/Niral', vm.list)
+    var update = $http.put('http://localhost:8080/list/', vm.list)
   }
 }

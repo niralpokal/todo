@@ -15,17 +15,22 @@
           <a id="signup" ng-click="start=!start"class="btn btn-primary btn-lg" href="#/signup" role="button">Signup</a></p>
         </div>
       </div>
-        <div class="row-fluid panel panel-default well" ng-view></div>
+        <div class="row-fluid">
+          <div class="col-md-offset-3 col-md-6">
+            <div class="panel panel-default well" ng-view></div>
+          </div>
+      </div>
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-route.js"></script>
   <script src="app.js"></script>
   <script src="user.service.js"></script>
-  <script src=home/home.controller.js></script>
+  <script src="login/login.controller.js"></script>
+  <script src="signup/signup.controller.js"></script>
   <script src="todo/todo.controller.js"></script>
   <script src="todo/date.directive.js"></script>
-  <script src="home/greeting.directive.js"></script>
+  <script src="todo/greeting.directive.js"></script>
   <script src="todo/number.directive.js"></script>
   <script src="todo/list.directive.js"></script>
   <script src="todo/add.directive.js"></script>
