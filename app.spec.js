@@ -22,6 +22,7 @@ describe('Check List', function(){
     })
   })
   it('check if you can login', function(done){
+    this.timeout(3000)
     request({
       method: 'POST',
       url: 'http://localhost:' + port+ '/user',
